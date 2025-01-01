@@ -23,18 +23,27 @@ export default function ContactPage() {
     subject: '',
     message: ''
   });
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Implement contact form submission logic
-    console.log('Contact form submitted', formData);
-    // Reset form or show success message
-    setFormData({
-      name: '',
-      email: '',
-      subject: '',
-      message: ''
-    });
+    setLoading(true);
+    setSuccess(false);
+
+    // Simulate a network request
+    setTimeout(() => {
+      console.log('Contact form submitted', formData);
+      setLoading(false);
+      setSuccess(true);
+      // Reset form
+      setFormData({
+        name: '',
+        email: '',
+        subject: '',
+        message: ''
+      });
+    }, 2000); // Simulate a 2-second delay
   };
 
   return (
@@ -63,7 +72,7 @@ export default function ContactPage() {
                   <FontAwesomeIcon icon={faEnvelope} className="text-2xl text-indigo-500" />
                   <div>
                     <h3 className={`font-semibold ${poppins.className}`}>Email</h3>
-                    <p className={`text-gray-600 ${openSans.className}`}>support@prescribio.com</p>
+                    <p className={`text-gray-600 ${openSans.className}`}>contact@prescribio.com</p>
                   </div>
                 </div>
                 
@@ -71,7 +80,7 @@ export default function ContactPage() {
                   <FontAwesomeIcon icon={faPhone} className="text-2xl text-indigo-500" />
                   <div>
                     <h3 className={`font-semibold ${poppins.className}`}>Phone</h3>
-                    <p className={`text-gray-600 ${openSans.className}`}>+1 (555) 123-4567</p>
+                    <p className={`text-gray-600 ${openSans.className}`}>+91 92896 00575</p>
                   </div>
                 </div>
                 
@@ -80,7 +89,7 @@ export default function ContactPage() {
                   <div>
                     <h3 className={`font-semibold ${poppins.className}`}>Address</h3>
                     <p className={`text-gray-600 ${openSans.className}`}>
-                      123 HealthTech Lane, Innovation City, Tech State 54321
+                      Tower 3, DLF Cyber City, Phase 2 Gurugram, Haryana 122002 India
                     </p>
                   </div>
                 </div>
@@ -154,10 +163,12 @@ export default function ContactPage() {
                 
                 <button 
                   type="submit" 
-                  className={`w-full bg-indigo-600 text-white p-3 rounded-lg hover:bg-indigo-700 transition-colors ${poppins.className}`}
+                  className={`w-full bg-indigo-600 text-white p-3 rounded-lg hover:bg-indigo-700 transition-colors ${loading ? 'animate-pulse' : ''} ${poppins.className}`}
+                  disabled={loading}
                 >
-                  Send Message
+                  {loading ? 'Sending...' : success ? 'Message Sent!' : 'Send Message'}
                 </button>
+                {success && <p className="text-green-500 text-sm mt-2">Your message has been sent successfully!</p>}
               </form>
             </motion.div>
           </div>

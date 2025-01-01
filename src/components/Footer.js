@@ -1,5 +1,6 @@
-// components/Footer.js
-import React from 'react';
+"use client"
+
+import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
   faTwitter, 
@@ -22,10 +23,34 @@ import {
 } from '../utils/fonts';
 
 export default function Footer() {
+  const [email, setEmail] = useState('');
+  const [isSubscribed, setIsSubscribed] = useState(false);
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  const handleSubscribe = () => {
+    // Simple email validation
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email)) {
+      setError('Please enter a valid email address.');
+      return;
+    }
+
+    setError('');
+    setLoading(true);
+
+    // Simulate a network request
+    setTimeout(() => {
+      setIsSubscribed(true);
+      setLoading(false);
+      setEmail(''); // Clear the input field after subscribing
+    }, 2000); // Simulate a 2-second delay
+  };
+
   return (
     <footer className={`relative bg-gradient-to-br from-indigo-900 via-indigo-800 to-indigo-900 text-white ${inter.className}`}>
       {/* Decorative top border */}
-      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-yellow-400 via-purple-500 to-indigo-500"></div>
+      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-yellow-400 via-purple-500 to-indigo-500"></ div>
       
       {/* Backdrop blur overlay */}
       <div className="absolute inset-0 bg-white/5 backdrop-blur-3xl"></div>
@@ -41,21 +66,6 @@ export default function Footer() {
             <p className={`text-gray-300 text-sm leading-relaxed ${openSans.className}`}>
               Revolutionizing digital prescriptions with smart technology and seamless healthcare integration.
             </p>
-            <div className="flex space-x-4 pt-4">
-              {[faTwitter, faFacebook, faLinkedin, faInstagram].map((icon, index) => (
-                <a
-                  key={index}
-                  href="#"
-                  className="group relative p-3 bg-indigo-800/50 rounded-lg hover:bg-yellow-400 transform hover:-translate-y-1 transition-all duration-300"
-                >
-                  <FontAwesomeIcon 
-                    icon={icon} 
-                    className="w-5 h-5 group-hover:text-indigo-900 transition-colors duration-300" 
-                  />
-                  <div className="absolute inset-0 rounded-lg bg-white opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
-                </a>
-              ))}
-            </div>
           </div>
 
           {/* Quick Links */}
@@ -90,9 +100,9 @@ export default function Footer() {
             </h4>
             <div className="space-y-4">
               {[
-                { icon: faPhone, text: '+1 (555) 123-4567' },
+                { icon: faPhone, text: '+91 92896 00575' },
                 { icon: faEnvelope, text: 'contact@prescribio.com' },
-                { icon: faLocationDot, text: 'San Francisco, CA' }
+                { icon: faLocationDot, text: 'Gurugram, India' }
               ].map((item, index) => (
                 <div 
                   key={index} 
@@ -123,11 +133,18 @@ export default function Footer() {
                 <input
                   type="email"
                   placeholder="Enter your email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   className={`w-full px-4 py-3 bg-indigo-800/50 border border-indigo-700 rounded-lg focus:outline-none focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400/20 transition-all duration-300 text-sm ${montserrat.className}`}
                 />
+                {error && <p className="text-red-500 text-sm">{error}</p>}
               </div>
-              <button className={`w-full bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-indigo-900 font-semibold px-4 py-3 rounded-lg transition-all duration-300 transform hover:-translate-y-0.5 hover:shadow-lg ${poppins.className}`}>
-                Subscribe
+              <button 
+                onClick={handleSubscribe} 
+                className={`w-full bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-indigo-900 font-semibold px-4 py-3 rounded-lg transition-all duration-300 transform hover:-translate-y-0. 5 hover:shadow-lg ${loading ? 'animate-pulse' : ''} ${poppins.className}`}
+                disabled={loading}
+              >
+                {loading ? 'Subscribing...' : isSubscribed ? 'Subscribed' : 'Subscribe'}
               </button>
             </div>
           </div>
@@ -140,14 +157,24 @@ export default function Footer() {
               &copy; {new Date().getFullYear()} PrescriBio. All rights reserved.
             </p>
             <div className="flex space-x-6">
-              {['Privacy Policy', 'Terms of Service', 'Cookie Policy'].map((item) => (
-                <a
-                  key={item}
-                  href="#"
-                  className={`text-sm text-gray-400 hover:text-yellow-400 transition-colors duration-300 ${montserrat.className}`}
-                >
-                  {item} </a>
-              ))}
+              <a
+                href="/PrivacyPolicy"
+                className={`text-sm text-gray-400 hover:text-yellow-400 transition-colors duration-300 ${montserrat.className}`}
+              >
+                Privacy Policy
+              </a>
+              <a
+                href="/TermsOfService"
+                className={`text-sm text-gray-400 hover:text-yellow-400 transition-colors duration-300 ${montserrat.className}`}
+              >
+                Terms of Service
+              </a>
+              <a
+                href="/CookiePolicy"
+                className={`text-sm text-gray-400 hover:text-yellow-400 transition-colors duration-300 ${montserrat.className}`}
+              >
+                Cookie Policy
+              </a>
             </div>
           </div>
         </div>
