@@ -100,7 +100,7 @@ export default function Footer() {
             </h4>
             <div className="space-y-4">
               {[
-                { icon: faPhone, text: '+91 92896 00575' },
+                { icon: faPhone, text: '+91 81780 22719' },
                 { icon: faEnvelope, text: 'contact@prescribio.com' },
                 { icon: faLocationDot, text: 'Gurugram, India' }
               ].map((item, index) => (

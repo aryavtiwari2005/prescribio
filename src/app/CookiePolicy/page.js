@@ -84,7 +84,7 @@ const CookiePolicy = () => {
       </p>
       <ul className={`list-disc ml-8 ${openSans.className}`}>
         <li>Email: contact@prescribio.com</li>
-        <li>Phone: +91 92896 00575</li>
+        <li>Phone: +91 81780 22719</li>
         <li>Address: Gurugram, India</li>
       </ul>
     </div>

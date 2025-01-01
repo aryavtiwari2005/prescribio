@@ -80,7 +80,7 @@ export default function ContactPage() {
                   <FontAwesomeIcon icon={faPhone} className="text-2xl text-indigo-500" />
                   <div>
                     <h3 className={`font-semibold ${poppins.className}`}>Phone</h3>
-                    <p className={`text-gray-600 ${openSans.className}`}>+91 92896 00575</p>
+                    <p className={`text-gray-600 ${openSans.className}`}>+91 81780 22719</p>
                   </div>
                 </div>
                 
