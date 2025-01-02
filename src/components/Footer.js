@@ -74,7 +74,7 @@ export default function Footer() {
               Quick Links
             </h4>
             <ul className="space-y-4">
-              {['About Us', 'Services', 'Our Team', 'Contact'].map((item) => (
+              {['Home', 'About', 'Services', 'Testimonials'].map((item) => (
                 <li key={item}>
                   <a 
                     href={`#${item.toLowerCase().replace(' ', '-')}`}
