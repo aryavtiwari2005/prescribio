@@ -130,7 +130,7 @@ const Services = () => {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <h2 className={`text-5xl font-bold text-center mb-6 text-gray-800 ${robotoSlab.className}`}>
+          <h2 className={`text-4xl font-bold text-center mb-6 text-gray-800 ${robotoSlab.className}`}>
             Our <span className={`${poppins.className} text-indigo-600`}>Comprehensive</span> Services
           </h2>
           <p className={`text-center mb-12 max-w-3xl mx-auto text-gray-600 text-xl leading-relaxed ${openSans.className}`}>
